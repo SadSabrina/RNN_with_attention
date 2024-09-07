@@ -1,6 +1,7 @@
 # RNN Attention
 
-Репозиторий содержит эксперимент по обучению Seq2Seq модели с разными видами механизма attention. 
+Репозиторий содержит эксперимент по обучению Seq2Seq модели с разными видами механизма attention и сопровождает пост [Attention: Attention!](https://teletype.in/@jdata_blog/B0T5Mn4DjF9). Присоединяйтесь к чтению и запускайте код =)
+
 Для эксперимента реализованы Bahdanau attention и Luong Attention, Luong Attention обобщаются способы: 
 
 - dot attention: $s_i^Th_j$ — скалярно перемножаем скрытые слои энкодера и декодера
