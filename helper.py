@@ -5,6 +5,8 @@ from torch import optim
 import random
 import torch
 
+device='cpu'
+
 def indexesFromSentence(lang, sentence):
     return [lang.word2index[word] for word in sentence.split(' ')] # предложение в вектор индексов
 
@@ -14,7 +16,7 @@ def tensorFromSentence(lang, sentence):
     return torch.tensor(indexes, dtype=torch.long, device=device).view(1, -1)
 
 def tensorsFromPair(pair):
-    input_tensor = tensorFromSentence(input_lang, pair[0])
+    input_tensor = tensorFromSentence(input_lang, pair[0])   # Здесь должны быть последовательности, завернутые в класс Lang 
     target_tensor = tensorFromSentence(second_lang, pair[1])
     return (input_tensor, target_tensor)
 
@@ -92,6 +94,6 @@ def evaluateRandomly(encoder, decoder, pairs, n=3):
         pair = random.choice(pairs)
         print('Input:', pair[0])
         #print('=', pair[1])
-        output_words, _ = evaluate(encoder, decoder, pair[0], input_lang, second_lang)
+        output_words, _ = evaluate(encoder, decoder, pair[0], input_lang, second_lang) # Здесь должны быть последовательности, завернутые в класс Lang 
         output_sentence = ' '.join(output_words)
         print('Output:', output_sentence)
