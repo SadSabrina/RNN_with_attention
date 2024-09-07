@@ -2,6 +2,23 @@ from tqdm import tqdm
 import time
 import torch.nn as nn
 from torch import optim
+import random
+import torch
+
+def indexesFromSentence(lang, sentence):
+    return [lang.word2index[word] for word in sentence.split(' ')] # предложение в вектор индексов
+
+def tensorFromSentence(lang, sentence):
+    indexes = indexesFromSentence(lang, sentence) 
+    indexes.append(EOS_token)
+    return torch.tensor(indexes, dtype=torch.long, device=device).view(1, -1)
+
+def tensorsFromPair(pair):
+    input_tensor = tensorFromSentence(input_lang, pair[0])
+    target_tensor = tensorFromSentence(second_lang, pair[1])
+    return (input_tensor, target_tensor)
+
+EOS_token = 1
 
 #TRAIN
 def train(train_dataloader, encoder, decoder, n_epochs, learning_rate=0.001,
